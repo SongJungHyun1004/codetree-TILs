@@ -8,10 +8,11 @@
 
 |총 문제수|획득 경험치|연속 학습|
 |---:|---:|---|
-1|80xp|8일째🔥|
+2|80xp|8일째🔥|
 
 |교재|이름|난이도|상태|최근 제출 코드|
 |---|---|:---:|:---:|---|
+|[Novice Mid / 완전탐색 I / 자리 마다 숫자를 정하는 완전탐색](https://www.codetree.ai/missions?missionId=5)|[[개념]개발자의 능력 3](https://www.codetree.ai/missions/5/problems/ability-of-developer-3)|![보통][medium]|![Passed][passed]|[링크](https://github.com/SongJungHyun1004/codetree-TILs/blob/main/231113/%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%9D%98%20%EB%8A%A5%EB%A0%A5%203/ability-of-developer-3.py)|
 |[Novice Mid / 완전탐색 I / 자리 마다 숫자를 정하는 완전탐색](https://www.codetree.ai/missions?missionId=5)|[[연습]두 가지로 열리는 자물쇠](https://www.codetree.ai/missions/5/problems/a-two-way-lock)|![쉬움][easy]|![Passed][passed]|[링크](https://github.com/SongJungHyun1004/codetree-TILs/blob/main/231113/%EB%91%90%20%EA%B0%80%EC%A7%80%EB%A1%9C%20%EC%97%B4%EB%A6%AC%EB%8A%94%20%EC%9E%90%EB%AC%BC%EC%87%A0/a-two-way-lock.py)|
 
 
