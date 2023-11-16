@@ -3,9 +3,8 @@ lst = []
 for _ in range(n):
     x, y = map(int, input().split())
     lst.append((x, y))
-
+mn_area = float('inf')
 for i in range(n):
-    mn_area = float('inf')
     mx_x, mx_y = float('-inf'), float('-inf')
     mn_x, mn_y = float('inf'), float('inf')
     for j in range(n):
