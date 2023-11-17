@@ -3,15 +3,16 @@ lst = []
 for _ in range(n):
     x1, x2 = map(int, input().split())
     lst.append((x1, x2))
-lst = sorted(lst)
-stack = []
-for l in lst:
-    if stack:
-        if stack[-1] < l[1]:
-            stack.append(l[1])
+cnt = 0
+for i in range(n):
+    flag = 0
+    for j in range(n):
+        if i == j:
             continue
-        while stack and stack[-1] > l[1]:
-            stack.pop()
-    else:
-        stack.append(l[1])
-print(len(stack))
+        x1, x2 = lst[i]
+        xx1, xx2 = lst[j]
+        if not ((x1 < xx1 and x2 < xx2) or (x1 > xx1 and x2 > xx2)):
+            flag = 1
+    if not flag:
+        cnt += 1
+print(cnt)
