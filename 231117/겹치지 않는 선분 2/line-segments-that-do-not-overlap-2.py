@@ -10,7 +10,7 @@ for l in lst:
         if stack[-1] < l[1]:
             stack.append(l[1])
             continue
-        while stack[-1] > l[1]:
+        while stack and stack[-1] > l[1]:
             stack.pop()
     else:
         stack.append(l[1])
