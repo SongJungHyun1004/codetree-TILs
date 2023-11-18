@@ -1,17 +1,15 @@
 from collections import deque
 n, x = map(int, input().split())
-arr = list(map(int, input().split()))
+arr = list(enumerate(list(map(int, input().split()))))
 q = deque(arr)
 cnt = 0
 while True:
-    v = q.popleft()
-    x -= 1
-    if v > max(q):
+    p, v = q[0]
+    if q.index(max(q)) == 0:
+        q.popleft()
         cnt += 1
-        if x == -1:
+        if x == p:
             break
     else:
-        q.append(v)
-        if x == -1:
-            x = len(q)-1
+        q.rotate(-1)
 print(cnt)
