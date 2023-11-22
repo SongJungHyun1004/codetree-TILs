@@ -7,7 +7,7 @@ prices = [(0,0)]+sorted(prices)
 cnt = 0
 total = 0
 for i in range(1, n+1):
-    total += prices[i-1][0]+prices[i][0]+prices[i][1]-prices[i-1][1]
+    total += prices[i-1][0]+prices[i][0]+prices[i][1]
     if total > b:
         break
     cnt += 1
