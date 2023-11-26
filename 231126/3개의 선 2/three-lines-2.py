@@ -14,6 +14,8 @@ def canPassAll():
                     for p in lst:
                         if p[xy1] == i or p[xy2] == j or p[xy3] == k:
                             continue
-                            ans = 0
-                        return ans
+                        ans = 0
+                    if ans:
+                        return 1
+    return 0
 print(canPassAll())
