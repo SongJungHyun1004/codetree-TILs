@@ -15,7 +15,7 @@ def is_possible(val):
     return True
 
 mn = float('inf')
-for a in range(1, max(arr)+1):
+for a in range(max(arr[0], arr[-1]), max(arr)+1):
     if is_possible(a):
         mn = min(mn, a)
 print(mn)
