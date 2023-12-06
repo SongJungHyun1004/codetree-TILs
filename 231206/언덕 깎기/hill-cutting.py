@@ -4,18 +4,18 @@ for _ in range(n):
     arr.append(int(input()))
 arr = sorted(arr)
 mn_cost = float('inf')
-for i in range(n):
-    for j in range(i, n):
-        if arr[j]-arr[i] > 17:
-            continue
-        left = arr[0:i]
-        right = arr[j+1:n]
-        cost = 0
-        for l in left:
-            x = arr[i] - l
+if arr[-1] < 17:
+    print(0)
+    exit(0)
+
+for i in range(arr[0], arr[-1]-17+1):
+    cost = 0
+    for v in arr:
+        if not i <= v <= i+17:
+            if v < i:
+                x = i-v
+            if v > i+17:
+                x = v-(i+17)
             cost += x*x
-        for r in right:
-            x = r - arr[j]
-            cost += x*x
-        mn_cost = min(mn_cost, cost)
+    mn_cost = min(mn_cost, cost)
 print(mn_cost)
