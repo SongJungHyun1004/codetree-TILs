@@ -7,7 +7,7 @@ while dist != x:
     if x-dist >= (v+1)*(v+2)//2:
         v += 1
     elif x-dist >= v*(v+1)//2:
-        v = v
+        pass
     else:
         v -= 1
     t += 1
