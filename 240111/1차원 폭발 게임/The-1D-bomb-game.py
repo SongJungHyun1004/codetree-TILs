@@ -9,21 +9,23 @@ while flag and lst:
     cnt = 1
     i = 1
     flag = 0
+    temp = []
     while i < len(lst):
         if pre == lst[i]:
             cnt += 1
         else:
-            pre = lst[i]
-            if cnt >= m:
+            if cnt < m:
+                temp.extend([pre]*cnt)
+            else:
                 flag = 1
-                for _ in range(cnt):
-                    lst.pop(i-cnt)
+            pre = lst[i]
             cnt = 1
         i += 1
-    if cnt >= m:
+    if cnt < m:
+        temp.extend([pre]*cnt)
+    else:
         flag = 1
-        for _ in range(cnt):
-            lst.pop(i-cnt)
+    lst = temp
 
 print(len(lst))
 for i in lst[::-1]:
