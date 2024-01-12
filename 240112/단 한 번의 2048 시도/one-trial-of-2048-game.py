@@ -47,7 +47,7 @@ for i in range(n):
         else:
             tmp[k] = grid[i][j]
         k += 1
-    if grid[i][n-2] != grid[i][n-1]:
+    if grid[i][n-2] != grid[i][n-1] and -1 != grid[i][n-1]:
         tmp[k] = grid[i][n-1]
     grid[i] = tmp[:]
 
