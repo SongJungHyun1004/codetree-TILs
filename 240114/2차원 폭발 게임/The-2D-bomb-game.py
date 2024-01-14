@@ -72,8 +72,9 @@ for kk in range(k):
         drop()
     grid = rotate()
     drop()
-explode()
-drop()
+while canExplode():
+    explode()
+    drop()
 
 cnt = 0
 for i in range(n):
