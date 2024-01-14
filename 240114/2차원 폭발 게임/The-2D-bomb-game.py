@@ -15,19 +15,38 @@ def get_end_idx_of_explosion(start_idx, numbers):
         
     return len(numbers) - 1
 
+def canExplode():
+    for j in range(n):
+        numbers = [grid[i][j] for i in range(n)]
+        curr_idx = 0
+        while curr_idx < len(numbers):
+            end_idx = get_end_idx_of_explosion(curr_idx, numbers)
+            if end_idx - curr_idx + 1 >= m:
+                if numbers[curr_idx]:
+                    return True
+            curr_idx = end_idx + 1
+    return False
+
 def explode():
     for j in range(n):
-        bombs = [grid[i][j] for i in range(n)]
-        bombs = bombs[::-1]
-        curr_idx = 0
-        while curr_idx < len(bombs):
-            end_idx = get_end_idx_of_explosion(curr_idx, bombs)
-            if end_idx - curr_idx + 1 >= m:
-                bombs[curr_idx:end_idx + 1] = [0]*(end_idx - curr_idx + 1)
-            curr_idx = end_idx + 1
-        bombs = bombs[::-1]
-        for i in range(n):
-            grid[i][j] = bombs[i]
+        while True:
+            flag = False
+            bombs = [grid[i][j] for i in range(n)]
+            old = bombs[:]
+            bombs = bombs[::-1]
+            curr_idx = 0
+            while curr_idx < len(bombs):
+                end_idx = get_end_idx_of_explosion(curr_idx, bombs)
+                if end_idx - curr_idx + 1 >= m:
+                    bombs[curr_idx:end_idx + 1] = [0]*(end_idx - curr_idx + 1)
+                    if bombs[curr_idx]:
+                        flag = True
+                curr_idx = end_idx + 1
+            bombs = bombs[::-1]
+            if old == bombs and not flag:
+                break
+            for i in range(n):
+                grid[i][j] = bombs[i]
     
 def drop():
     for j in range(n):
@@ -47,13 +66,14 @@ def rotate():
             ret[i][j] = grid[n-1-j][i]
     return ret
 
-for _ in range(k):
-    explode()
-    drop()
+for kk in range(k):
+    while canExplode():
+        explode()
+        drop()
     grid = rotate()
     drop()
-    explode()
-    drop()
+explode()
+drop()
 
 cnt = 0
 for i in range(n):
