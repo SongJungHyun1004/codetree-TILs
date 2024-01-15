@@ -35,8 +35,11 @@ def countPair():
     cnt = 0
     for i in range(n-1):
         for j in range(n-1):
-            if tmp[i][j] and (tmp[i][j] == tmp[i+1][j] or tmp[i][j] == tmp[i][j+1]):
-                cnt += 1
+            if tmp[i][j]:
+                if tmp[i][j] == tmp[i+1][j]:
+                    cnt += 1
+                if tmp[i][j] == tmp[i][j+1]:
+                    cnt += 1
     t = [tmp[i][n-1] for i in range(n)]
     for i in range(n-1):
         if t[i] and t[i] == t[i+1]:
