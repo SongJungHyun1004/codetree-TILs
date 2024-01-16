@@ -19,9 +19,11 @@ while True:
     if in_range(nx, ny):
         if miro[nx][ny] == '#':
             d += 1
+            d %= 4
         else:
             if miro[nx][ny] != '#':
                 d -= 1
+                d %= 4
             x, y = nx, ny
             t += 1
             if (x, y) in lst:
