@@ -1,4 +1,3 @@
-import copy
 t = int(input())
 dx = [0,1,0,-1]
 dy = [1,0,-1,0]
@@ -18,7 +17,7 @@ for _ in range(t):
         x, y, d = input().split()
         x = int(x)-1; y = int(y)-1
         grid[x][y] = [1, direction[d]]
-    for tt in range(2*n): #최대 2n시간
+    for _ in range(2*n): #최대 2n시간
         tmp = [[[0, -1] for _ in range(n)] for _ in range(n)]
         for i in range(n):
             for j in range(n):
@@ -33,7 +32,9 @@ for _ in range(t):
             for j in range(n):
                 if tmp[i][j][0] > 1:
                     tmp[i][j] = [0, -1]
-        grid = copy.deepcopy(tmp)
+        for i in range(n):
+            for j in range(n):
+                grid[i][j] = tmp[i][j]
     cnt = 0
     for i in range(n):
         for j in range(n):
