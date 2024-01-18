@@ -28,8 +28,7 @@ for _ in range(t):
                     if in_range(nx, ny):
                         tmp[nx][ny] = [tmp[nx][ny][0]+1, d]
                     else:
-                        tmp[i][j] = [1, (d+2)%4]
-        
+                        tmp[i][j] = [tmp[i][j][0]+1, (d+2)%4]
         for i in range(n):
             for j in range(n):
                 if tmp[i][j][0] > 1:
