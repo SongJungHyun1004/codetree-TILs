@@ -12,35 +12,27 @@ direction = {
 def in_range(x, y, n):
     return 0<=x<n and 0<=y<n
 
-def move_and_check_crash(grid, n):
-    tmp = [[[0, -1] for _ in range(n)] for _ in range(n)]
-    for x in range(n):
-        for y in range(n):
-            v, d = grid[x][y][0], grid[x][y][1]
-            if v:
-                nx, ny = x + dx[d], y + dy[d]
-                if in_range(nx, ny, n):
-                    tmp[nx][ny] = [tmp[nx][ny][0]+1, d]
-                else:
-                    tmp[x][y] = [tmp[x][y][0]+1, (d+2)%4]
-    for i in range(n):
-        for j in range(n):
-            if tmp[i][j][0] > 1:
-                tmp[i][j] = [0, -1]
-    return tmp
-
 for _ in range(t):
     n, m = map(int, input().split())
-    grid = [[[0, -1] for _ in range(n)] for _ in range(n)]
+    grid = {}
     for _ in range(m):
         x, y, d = input().split()
         x = int(x)-1; y = int(y)-1
-        grid[x][y] = [1, direction[d]]
+        grid[(x, y)] = direction[d]
+    
     for _ in range(2*n): #최대 2n시간
-        grid = move_and_check_crash(grid, n)
-    cnt = 0
-    for i in range(n):
-        for j in range(n):
-            if grid[i][j][0]:
-                cnt += 1
-    print(cnt)
+        new_grid = {}
+        to_remove = set()
+        for (x, y), d in grid.items():
+            nx, ny = x + dx[d], y + dy[d]
+            if not in_range(nx, ny, n): # 벽에 부딪힘
+                nx, ny = x, y
+                d = (d+2)%4
+            if (nx, ny) in new_grid: # 충돌
+                to_remove.add((nx, ny))
+            else:
+                new_grid[(nx, ny)] = d
+        for pos in to_remove:
+            del new_grid[pos]
+        grid = new_grid
+    print(len(grid))
