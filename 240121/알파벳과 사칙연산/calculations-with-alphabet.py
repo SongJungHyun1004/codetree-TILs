@@ -5,7 +5,7 @@ for i in expr:
         alpha.append(i)
 n = len(alpha)
 num = []
-mx = 0
+mx = float('-inf')
 
 def cal(num):
     result = num[0][1]
