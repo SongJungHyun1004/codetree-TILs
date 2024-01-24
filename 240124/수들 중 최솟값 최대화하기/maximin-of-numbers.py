@@ -1,3 +1,5 @@
+import sys
+input = sys.stdin.readline
 n = int(input())
 grid = [
     list(map(int, input().split()))
@@ -20,8 +22,10 @@ def combi(i):
         mx = max(mx, get_min(pos_lst))
         return
     for x in range(n):
+        if row_visited[x]:
+            continue
         for y in range(n):
-            if row_visited[x] or col_visited[y]:
+            if col_visited[y]:
                 continue
             pos_lst.append((x, y))
             row_visited[x] = True
