@@ -8,7 +8,7 @@ grid = [
 row_visited = [False]*n
 col_visited = [False]*n
 pos_lst = []
-mx = 0
+mx = -1
 
 def get_min(pos_lst):
     mn = float('inf')
@@ -16,10 +16,12 @@ def get_min(pos_lst):
         mn = min(mn, grid[x][y])
     return mn
 
-def combi(i):
+def combi(i, curr_min):
     global mx
+    if curr_min <= mx:  # Pruning
+        return
     if i == n:
-        mx = max(mx, get_min(pos_lst))
+        mx = max(mx, curr_min)
         return
     for x in range(n):
         if row_visited[x]:
@@ -27,13 +29,13 @@ def combi(i):
         for y in range(n):
             if col_visited[y]:
                 continue
-            pos_lst.append((x, y))
             row_visited[x] = True
             col_visited[y] = True
-            combi(i+1)
-            pos_lst.pop()
+            pos_lst.append((x, y))
+            combi(i+1, min(curr_min, grid[x][y]))  # Update current minimum
             row_visited[x] = False
             col_visited[y] = False
-            
-combi(0)
+            pos_lst.pop()
+
+combi(0, float('inf'))
 print(mx)
