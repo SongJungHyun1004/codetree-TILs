@@ -19,7 +19,7 @@ def dfs(x, y):
     visited[x][y] = True
     for dx, dy in zip(dxs, dys):
         nx, ny = x + dx, y + dy
-        if in_range(nx, ny) and miro[nx][ny]:
+        if in_range(nx, ny) and not visited[nx][ny] and miro[nx][ny]:
             dfs(nx, ny)
 
 dfs(0, 0)
