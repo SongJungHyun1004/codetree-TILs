@@ -12,6 +12,21 @@ dys = [0,1,-1,0]
 
 def in_range(x, y):
     return 0<=x<n and 0<=y<n
+def update(x, y):
+    global mx, next_x, next_y
+    if mx > grid[x][y]:
+        return
+    elif mx < grid[x][y]:
+        mx = grid[x][y]
+        next_x, next_y = x, y
+    else:
+        if next_x < x:
+            return
+        elif next_x > x:
+            next_x, next_y = x, y
+        else:
+            if next_y > y:
+                next_x, next_y = x, y
 
 def bfs(sx, sy, v):
     global mx, next_x, next_y
@@ -25,9 +40,7 @@ def bfs(sx, sy, v):
             if in_range(nx, ny) and not visited[nx][ny] and grid[nx][ny] < v:
                 visited[nx][ny] = True
                 q.append((nx, ny))
-                if mx <= grid[nx][ny]:
-                    mx = grid[nx][ny]
-                    next_x, next_y = nx, ny
+                update(nx, ny)
 pre_x, pre_y = r, c
 for _ in range(k):
     mx = 0
