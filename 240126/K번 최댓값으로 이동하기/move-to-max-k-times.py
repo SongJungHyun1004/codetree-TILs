@@ -17,6 +17,7 @@ def bfs(sx, sy, v):
     global mx, next_x, next_y
     q = deque([(sx, sy)])
     visited[sx][sy] = True
+    next_x, next_y = sx, sy
     while q:
         x, y = q.popleft()
         for dx, dy in zip(dxs, dys):
