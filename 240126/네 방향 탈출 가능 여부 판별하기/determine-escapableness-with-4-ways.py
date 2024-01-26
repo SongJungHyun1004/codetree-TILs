@@ -18,11 +18,11 @@ def bfs(start):
     q = deque([start])
     while q:
         x, y = q.popleft()
-        visited[x][y] = True
         for dx, dy in zip(dxs, dys):
             nx, ny = x + dx, y + dy
             if in_range(nx, ny) and not visited[nx][ny] and grid[nx][ny]:
+                visited[nx][ny] = True
                 q.append((nx, ny))
-
+visited[0][0] = True
 bfs((0, 0))
 print(1) if visited[n-1][m-1] else print(0)
