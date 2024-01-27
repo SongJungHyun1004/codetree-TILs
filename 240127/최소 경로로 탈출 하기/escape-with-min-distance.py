@@ -26,5 +26,6 @@ def bfs(start):
                 visited[nx][ny] = True
                 step[nx][ny] = step[x][y] + 1
                 q.append((nx, ny))
+visited[0][0] = True
 bfs((0, 0))
 print(step[n-1][m-1]) if visited[n-1][m-1] else print(-1)
