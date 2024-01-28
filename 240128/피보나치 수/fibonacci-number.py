@@ -1,12 +1,8 @@
 n = int(input())
 dp = [-1]*46
-def memoization(i):
-    if dp[i] != -1:
-        return dp[i]
-    if i < 3:
-        dp[i] = 1
-    else:
-        dp[i] = memoization(i-1) + memoization(i-2)
-    return dp[i]
+dp[1] = 1
+dp[2] = 1
+for i in range(3, n+1):
+    dp[i] = dp[i-1] + dp[i-2]
 
-print(memoization(n))
+print(dp[n])
