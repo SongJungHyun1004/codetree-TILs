@@ -1,7 +1,8 @@
+import sys
+INT_MIN = -sys.maxsize
 n = int(input())
-a = list(map(int, input().split()))
-dp = [0]*n
-dp[0] = 1
+a = [0] + list(map(int, input().split()))
+dp = [0]+[INT_MIN]*n
 for i in range(1, n):
     for j in range(i):
         if a[i] > a[j]:
