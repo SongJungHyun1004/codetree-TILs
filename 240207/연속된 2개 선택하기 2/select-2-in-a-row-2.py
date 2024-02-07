@@ -9,4 +9,4 @@ for i in range(1, n):
     dp_min[i] = min(numbers[i], dp_min[i-1]*numbers[i], dp_max[i-1]*numbers[i])
     dp_max[i] = max(numbers[i], dp_min[i-1]*numbers[i], dp_max[i-1]*numbers[i])
 
-print(round(max(dp_max), 3))
+print('%.3f' % max(dp_max))
