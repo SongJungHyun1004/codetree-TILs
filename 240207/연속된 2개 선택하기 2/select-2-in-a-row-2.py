@@ -1,11 +1,12 @@
 n = int(input())
-arr = [1.0]
-for _ in range(n):
-    arr.append(float(input()))
-for i in range(1, n+1):
-    arr[i] = arr[i-1]*arr[i]
-mx = 0
-for i in range(1, n+1):
-    for j in range(i+1, n+1):
-        mx = max(mx, arr[j]/arr[i])
-print(round(mx, 3))
+numbers = [float(input()) for _ in range(n)]
+
+dp_min = [0]*n
+dp_max = [0]*n
+dp_min[0] = dp_max[0] = numbers[0]
+
+for i in range(1, n):
+    dp_min[i] = min(numbers[i], dp_min[i-1]*numbers[i], dp_max[i-1]*numbers[i])
+    dp_max[i] = max(numbers[i], dp_min[i-1]*numbers[i], dp_max[i-1]*numbers[i])
+
+print(round(max(dp_max), 3))
