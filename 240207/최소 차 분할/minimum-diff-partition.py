@@ -1,21 +1,21 @@
 n = int(input())
-numbers = list(map(int, input().split()))
-
-dp = [0]*(sum(numbers)+1)
-dp[0] = 1
-
-for num in numbers:
-    for i in range(sum(numbers), -1, -1):
-        if dp[i]:
-            dp[i+num] = 1
-
-min_diff = float('inf')
-total_sum = sum(numbers)
-
-for i, can_make in enumerate(dp):
-    if can_make:
-        group1 = i
-        group2 = total_sum - i
-        min_diff = min(min_diff, abs(group1 - group2))
-
-print(min_diff)
+arr = [0]+list(map(int, input().split()))
+s = sum(arr)
+dp = [
+    [False]*(s+1)
+    for _ in range(n+1)
+]
+dp[0][0] = True
+for i in range(1, n+1):
+    for j in range(s+1):
+        if j >= arr[i] and dp[i-1][j-arr[i]]:
+            dp[i][j] = True
+        elif dp[i-1][j]:
+            dp[i][j] = True
+mn = float('inf')
+# 한 쪽 그룹합이 1<= i <= s-1 선택 가능
+# 다른 쪽 그룹합은 s-i가 됨
+for i in range(1, s):
+    if dp[n][i]:
+        mn = min(mn, abs(i-(s-i)))
+print(mn)
