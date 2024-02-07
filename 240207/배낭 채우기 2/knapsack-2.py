@@ -12,5 +12,5 @@ for i in range(1, m+1):
         if i >= weight:
             if dp[i-weight] == -1:
                 continue
-            dp[i] = max(dp[i], dp[i-1], dp[i-weight]+value)
-print(dp[m])
+            dp[i] = max(dp[i], dp[i-weight]+value)
+print(max(dp))
