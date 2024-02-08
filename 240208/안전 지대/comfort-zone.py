@@ -5,7 +5,7 @@ vilage = [
 ]
 mx_k = 0
 mx_safe = 0
-ans = 0
+ans = 1
 for i in range(n):
     for j in range(m):
         mx_k = max(mx_k, vilage[i][j])
@@ -21,7 +21,7 @@ def dfs(x, y, k):
         if in_range(nx, ny) and not visited[nx][ny] and k < vilage[nx][ny]:
             dfs(nx, ny, k)
 
-for k in range(1, mx_k):
+for k in range(1, mx_k+1):
     visited = [
         [False]*m
         for _ in range(n)
