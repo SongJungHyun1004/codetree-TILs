@@ -1,11 +1,14 @@
 n, s = map(int, input().split())
 arr = list(map(int, input().split()))
 ans = float('inf')
+summation = 0
+j = 0
 for i in range(n):
-    summation = 0
-    for j in range(i, n):
-        summation += arr[j]
+    while j < n:
         if summation >= s:
-            ans = min(ans, j-i+1)
             break
+        summation += arr[j]
+        j+=1
+    ans = min(ans, j-i+1)
+    summation -= arr[i]
 print(-1) if ans == float('inf') else print(ans)
