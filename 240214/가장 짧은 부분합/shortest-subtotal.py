@@ -4,11 +4,10 @@ ans = float('inf')
 summation = 0
 j = 0
 for i in range(n):
-    while j < n:
-        if summation >= s:
-            break
+    while summation < s and j < n:
         summation += arr[j]
-        j+=1
-    ans = min(ans, j-i+1)
+        j += 1
+    if summation >= s:
+        ans = min(ans, j - i)
     summation -= arr[i]
 print(-1) if ans == float('inf') else print(ans)
