@@ -1,18 +1,17 @@
 m = int(input())
 a, b = map(int, input().split())
-arr = [i+1 for i in range(m)]
 mn = float('inf')
 mx = 0
 
 def binary_search(target):
-    left = 0
-    right = m-1
+    left = 1
+    right = m
     turn = 1
     while left <= right:
         mid = (left+right)//2
-        if arr[mid] == target:
+        if mid == target:
             return turn
-        if arr[mid] > target:
+        if mid > target:
             right = mid - 1
         else:
             left = mid + 1
