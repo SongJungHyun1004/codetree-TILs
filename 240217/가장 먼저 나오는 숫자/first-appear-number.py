@@ -12,7 +12,7 @@ def lower_bound(target):
             right = mid - 1
         else:
             left = mid + 1
-    if arr[min_idx] != target:
+    if min_idx == n or arr[min_idx] != target:
         return -1
     return min_idx+1
 for i in m_lst:
