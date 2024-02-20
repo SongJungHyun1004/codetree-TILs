@@ -1,9 +1,12 @@
-from collections import Counter
 n, k = map(int, input().split())
 arr = list(map(int, input().split()))
-arr = Counter(arr)
+dic = {}
 cnt = 0
 for i in arr:
-    if k-i in arr:
-        cnt += max(arr[i], arr[k-i])
-print(cnt//2)
+    if k-i in dic:
+        cnt += dic[k-i]
+    if i in dic:
+        dic[i] += 1
+    else:
+        dic[i] = 1
+print(cnt)
