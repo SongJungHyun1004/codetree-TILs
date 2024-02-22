@@ -1,9 +1,13 @@
-INT_MAX = 10**5
+import sys
+
 n, a, b, c, d = map(int, input().split())
-dp = [0]+[INT_MAX]*n
-for i in range(1, n+1):
-    if i >= a:
-        dp[i] = min(dp[i], dp[i-a]+b)
-    if i >= c:
-        dp[i] = min(dp[i], dp[i-c]+d)
-print(dp[n])
+min_energy = sys.maxsize
+
+for i in range(n // a + 1):
+    for j in range(n // c + 1):
+        work_done = a * i + c * j
+        energy = b * i + d * j
+        if work_done >= n and energy < min_energy:
+            min_energy = energy
+            
+print(min_energy)
