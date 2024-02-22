@@ -15,7 +15,7 @@ def choose(i):
     for p in pos:
         if cows:
             if cows[-1] >= p:
-                return
+                continue
             if p not in cows:
                 cows.append(p)
                 choose(i+1)
