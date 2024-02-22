@@ -1,5 +1,4 @@
-import sys
-INT_MAX = sys.maxsize
+INT_MAX = 10**5
 n, a, b, c, d = map(int, input().split())
 dp = [0]+[INT_MAX]*n
 for i in range(1, n+1):
