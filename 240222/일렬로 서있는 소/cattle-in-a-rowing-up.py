@@ -1,29 +1,18 @@
-n = int(input())
-pos = []
-for _ in range(n):
-    pos.append(int(input()))
-pos = sorted(pos)
-cows = []
-cnt = 0
-def choose(i):
-    global cnt
-    if i == 3:
-        x, y, z = cows[0], cows[1], cows[2]
-        if x < y < z and y-x <= z-y <= 2*(y-x):
-            cnt += 1
-        return
-    for p in pos:
-        if cows:
-            if p in cows:
-                continue
-            if cows[-1] >= p:
-                continue
-            cows.append(p)
-            choose(i+1)
-            cows.pop()
+def combinations(array, r):
+    for i in range(len(array)):
+        if r == 1:
+            yield [array[i]]
         else:
-            cows.append(p)
-            choose(i+1)
-            cows.pop()
-choose(0)
+            for next in combinations(array[i+1:], r-1):
+                yield [array[i]] + next
+
+n = int(input())
+pos = sorted([int(input()) for _ in range(n)])
+
+cnt = 0
+for cows in combinations(pos, 3):
+    x, y, z = cows
+    if x < y < z and y-x <= z-y <= 2*(y-x):
+        cnt += 1
+
 print(cnt)
