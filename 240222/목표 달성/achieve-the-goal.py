@@ -9,5 +9,6 @@ energy += (n//a)*b
 n %= a
 energy += (n//c)*d
 n %= c
-
+if n:
+    energy += min(b, d)
 print(energy)
