@@ -14,12 +14,13 @@ def choose(i):
         return
     for p in pos:
         if cows:
+            if p in cows:
+                continue
             if cows[-1] >= p:
                 continue
-            if p not in cows:
-                cows.append(p)
-                choose(i+1)
-                cows.pop()
+            cows.append(p)
+            choose(i+1)
+            cows.pop()
         else:
             cows.append(p)
             choose(i+1)
