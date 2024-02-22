@@ -1,6 +1,6 @@
 n, a, b, c, d = map(int, input().split())
 # 효율 좋은 애 부터
-if a/b < c/d:
+if b/a > d/c: # 1만큼 일할 때 에너지가 작은것이 효율이 더 좋다
     a, c = c, a
     b, d = d, b
 
