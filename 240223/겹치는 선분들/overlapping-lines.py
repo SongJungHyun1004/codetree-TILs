@@ -14,19 +14,13 @@ for _ in range(n):
         last_p = s
     lst.append((s, +1))
     lst.append((e, -1))
-lst = sorted(lst, key=lambda x:(x[0], -x[1]))
+lst = sorted(lst)
 
-pre_cnt = 0
 cnt = 0
 length = 0
-for p, v in lst:
-    if v == +1:
-        cnt += 1
-        if cnt >= k and pre_cnt < k:
-            pre_s = p
-    else:
-        cnt -= 1
-        if pre_cnt >= k and cnt < k:
-            length += p - pre_s
-    pre_cnt = cnt
+for i, (p, v) in enumerate(lst):
+    if cnt >= k:
+        pre_p, _ = lst[i-1]
+        length += p - pre_p
+    cnt += v
 print(length)
