@@ -70,4 +70,4 @@ def combi(idx, last):
             selected[i] = False
 combi(0, 0)
 
-print(mn_move)
+print(mn_move) if not float('inf') else print(-1)
