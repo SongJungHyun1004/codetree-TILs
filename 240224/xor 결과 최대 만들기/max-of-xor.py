@@ -17,7 +17,7 @@ def combi(idx, last):
         if not selected[i]:
             num.append(arr[i])
             selected[i] = True
-            combi(idx+1, last)
+            combi(idx+1, i)
             num.pop()
             selected[i] = False
 mx = 0
