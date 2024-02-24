@@ -69,5 +69,7 @@ def combi(idx, last):
             coin.pop()
             selected[i] = False
 combi(0, 0)
-
-print(mn_move) if not float('inf') else print(-1)
+if mn_move == float('inf'):
+    print(-1)
+else:
+    print(mn_move)
