@@ -14,11 +14,12 @@ def combi(idx, last):
         mx = max(mx, xor(num))
         return
     for i in range(last, n):
-        num.append(arr[i])
-        selected[i] = True
-        combi(idx+1, last)
-        num.pop()
-        selected[i] = False
+        if not selected[i]:
+            num.append(arr[i])
+            selected[i] = True
+            combi(idx+1, last)
+            num.pop()
+            selected[i] = False
 mx = 0
 combi(0, 0)
 print(mx)
