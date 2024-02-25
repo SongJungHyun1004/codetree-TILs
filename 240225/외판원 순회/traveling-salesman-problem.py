@@ -10,7 +10,8 @@ mn = float('inf')
 def choose(i, last):
     global mn
     if i == n-1:
-        mn = min(mn, sum(cost)+grid[last][0])
+        if grid[last][0]:
+            mn = min(mn, sum(cost)+grid[last][0])
         return
     for j in range(1, n):
         if last == j or not grid[last][j] or visited[j]:
