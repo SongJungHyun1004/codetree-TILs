@@ -9,8 +9,8 @@ if m2 > m1:
     day += d2
 else:
     day = d2-d1+1
-weeks = ['Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-for i in range(7):
+weeks = ['','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+for i in range(8):
     if weeks[i] == weekday:
         r = i
         break
