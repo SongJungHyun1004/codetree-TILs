@@ -35,6 +35,7 @@ def bfs(sx, sy):
                 q.append((nx, ny))
                 if grid[nx][ny] == 3:
                     mn_dist = min(mn_dist, dist[nx][ny])
+                    break
     if mn_dist == float('inf'):
         ans[sx][sy] = -1
     else:
