@@ -24,6 +24,7 @@ def bfs(sx, sy):
     ]
     q = deque([(sx, sy)])
     visited[sx][sy] = True
+    mn_dist = float('inf')
     while q:
         x, y = q.popleft()
         for dx, dy in zip(dxs, dys):
@@ -32,11 +33,8 @@ def bfs(sx, sy):
                 visited[nx][ny] = True
                 dist[nx][ny] = dist[x][y] + 1
                 q.append((nx, ny))
-    mn_dist = float('inf')
-    for i in range(n):
-        for j in range(n):
-            if grid[i][j] == 3 and visited[i][j]:
-                mn_dist = min(mn_dist, dist[i][j])
+                if grid[nx][ny] == 3:
+                    mn_dist = min(mn_dist, dist[nx][ny])
     if mn_dist == float('inf'):
         ans[sx][sy] = -1
     else:
