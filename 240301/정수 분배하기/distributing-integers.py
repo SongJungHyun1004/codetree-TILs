@@ -6,8 +6,6 @@ for _ in range(n):
 def is_possible(k):
     cnt = 0
     for elem in lst:
-        if elem < k:
-            return False
         cnt += elem//k
     return cnt >= m
 
