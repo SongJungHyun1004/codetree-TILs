@@ -1,5 +1,7 @@
+from sortedcontainers import SortedSet
 n, q = map(int, input().split())
-pos = sorted(list(map(int, input().split())))
+pos = list(map(int, input().split()))
+pos = SortedSet(pos)
 mapper = {}
 num = 0
 for p in pos:
@@ -8,8 +10,6 @@ for p in pos:
 
 for _ in range(q):
     a, b = map(int, input().split())
-    cnt = 0
-    for i in range(a, b+1):
-        if i in mapper:
-            cnt += 1
-    print(cnt)
+    idx_a = mapper[pos[pos.bisect_left(a)]]
+    idx_b = mapper[pos[pos.bisect_right(b)-1]]
+    print(idx_b-idx_a+1)
