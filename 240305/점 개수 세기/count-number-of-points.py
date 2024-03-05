@@ -1,4 +1,6 @@
+import sys
 from sortedcontainers import SortedSet
+input = sys.stdin.readline
 n, q = map(int, input().split())
 pos = SortedSet(list(map(int, input().split())))
 mapper = {}
@@ -9,6 +11,9 @@ for p in pos:
 
 for _ in range(q):
     a, b = map(int, input().split())
-    idx_a = mapper[pos[pos.bisect_left(a)]]
-    idx_b = mapper[pos[pos.bisect_right(b)-1]]
-    print(idx_b-idx_a+1)
+    if pos.bisect_left(a) == len(pos):
+        print(0)
+    else:
+        idx_a = mapper[pos[pos.bisect_left(a)]]
+        idx_b = mapper[pos[pos.bisect_right(b)-1]]
+        print(idx_b-idx_a+1)
