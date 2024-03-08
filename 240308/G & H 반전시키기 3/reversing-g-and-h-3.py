@@ -14,5 +14,6 @@ for i in range(n):
             length = 0
             miss = False
     else:
+        length = 0
         miss = False
 print(cnt)
