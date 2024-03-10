@@ -1,116 +1,139 @@
+MAX_N = 100002
+MAX_M = 10
+
 class Node:
-    def __init__(self, data):
-        self.data = data
+    # 사람들을 나타내는 노드입니다.
+    def __init__(self, id):
+        # 사람의 번호를 나타냅니다.
+        self.id = id
         self.prev = None
         self.next = None
 
-class DList:
-    def __init__(self):
-        self.head = None
-        self.tail = None
-        self.nodes = {}
+def connect(s, e):
+    # 두 사람을 연결합니다.
+    if s is not None:
+        s.next = e
+    if e is not None:
+        e.prev = s
 
-    def find(self, data):
-        return self.nodes.get(data, None)
-
-    def pop(self, data):
-        node = self.find(data)
-        if node.prev:
-            node.prev.next = node.next
-        if node.next:
-            node.next.prev = node.prev
-        if node == self.head:
-            self.head = node.next
-        if node == self.tail:
-            self.tail = node.prev
-        node.prev = node.next = None
-
-    def append(self, data):
-        new_node = Node(data)
-        self.nodes[data] = new_node
-        if not self.head:
-            self.head = self.tail = new_node
-            return
-        else:
-            self.tail.next = new_node
-            new_node.prev = self.tail
-            self.tail = new_node
-
-    def insert_prev(self, target_data, new_data):
-        target_node = self.find(target_data)
-        new_node = Node(new_data)
-        self.nodes[new_data] = new_node
-        if target_node.prev:
-            target_node.prev.next = new_node
-            new_node.prev = target_node.prev
-        new_node.next = target_node
-        target_node.prev = new_node
-        if target_node == self.head:
-            self.head = new_node
-
-    def display(self):
-        if not self.head:
-            print(-1)
-            return
-        current = self.head
-        while current:
-            print(current.data, end=' ')
-            current = current.next
-        print()
+# i번 사람을 집에 보냅니다.
+def pop(i):
+    # i번 사람이 어느 줄에 서있는지 확인합니다.
+    l = lineNum[i.id]
     
-    def connect(self, s, e):
-        if s:
-            s.next = e
-        else:
-            self.head = e
-        if e:
-            e.prev = s
-        else:
-            self.tail = s
-            
-n, m, q = map(int, input().split())
-x = n//m
-line = [DList() for _ in range(m)]
-for i in range(m):
-    people = list(map(int, input().split()))
-    for p in people[1:]:
-        line[i].append(p)
+    # i번 사람이 어느 줄에도 서있지 않다면 아무것도 하지 않습니다.
+    if l == 0:
+        return
+    # i번 사람이 줄의 시작이었다면 줄의 시작을 다음 사람으로 바꿉니다.
+    if head[l] == i:
+        head[l] = i.next
+    # i번 사람이 줄의 끝이었다면 줄의 끝을 이전 사람으로 바꿉니다.
+    if tail[l] == i:
+        tail[l] = i.prev
 
+    # i번 사람을 줄에서 뺍니다.
+    # 원래 i번 사람의 이전 사람과 다음 사람을 연결합니다.
+    if i.prev is not None:
+        i.prev.next = i.next
+    if i.next is not None:
+        i.next.prev = i.prev
+
+    # i번 사람이 어느 줄에도 서있지 않다고 표시합니다.
+    lineNum[i.id] = 0
+    i.next = i.prev = None
+
+def insertFront(a, b):
+    # a번 사람을 b번 사람 앞에 서게 합니다.
+    lineNumB = lineNum[b.id]
+
+    # b번 사람이 어느 줄에 서있는지 확인합니다.
+    if head[lineNumB] == b:
+        head[lineNumB] = a
+
+    # b번 사람이 해당 줄의 맨 앞이었다면, a번 사람을 줄의 맨 앞으로 만듭니다.
+    pop(a)
+    connect(b.prev, a)
+    connect(a, b)
+
+    # a번 사람을 해당 줄에서 뺍니다.
+    lineNum[a.id] = lineNumB
+
+    # a번 사람을 b번 사람 앞에 서게 합니다.
+def popRangeAndInsertPrev(a, b, c):
+    # a번 사람부터 b번 사람까지를 c번 사람 앞에 이동합니다.
+    lineNumA = lineNum[a.id]
+    lineNumC = lineNum[c.id]
+
+    # a, c번 사람이 어느 줄에 서있는지 확인합니다.
+    if head[lineNumA] == a:
+        head[lineNumA] = b.next
+    if tail[lineNumA] == b:
+        tail[lineNumA] = a.prev
+
+    # a번 사람이 해당 줄의 맨 앞이었다면, 해당 줄의 맨 앞 사람을 b번 사람의 뒤로 변경합니다.
+    connect(a.prev, b.next)
+    if head[lineNumC] == c:
+        head[lineNumC] = a
+    else:
+        connect(c.prev, a)
+
+    # b번 사람이 해당 줄의 맨 끝이었다면, 해당 줄의 맨 끝 사람을 a번 사람의 앞으로 변경합니다.
+    connect(b, c)
+    cur = a
+
+    # a번 사람부터 b번 사람까지를 줄에서 뺍니다.
+    while cur != b.next:
+        lineNum[cur.id] = lineNumC
+        cur = cur.next
+
+    # 이때 a번 사람의 이전 사람과 b번 사람의 다음 사람을 연결합니다.
+
+def printLine(l):
+    # 해당 줄을 전부 출력합니다.
+    cur = head[l]
+    if cur is None:
+        print(-1)
+    else:
+        while cur is not None:
+            print(cur.id, end=" ")
+            cur = cur.next
+        print()
+
+n, m, q = map(int, input().split())
+
+# m 개의 줄을 입력 받습니다.
+nodes = [None] * (MAX_N + 1)
+head = [None] * (MAX_M + 1)
+tail = [None] * (MAX_M + 1)
+lineNum = [0] * (MAX_N + 1)
+
+for i in range(1, m + 1):
+    line = list(map(int, input().split()))
+    l = line[0]
+    for j in range(l):
+        t = line[j + 1]
+        lineNum[t] = i
+        nodes[t] = Node(t)
+        if j == 0:
+            head[i] = tail[i] = nodes[t]
+        else:
+            connect(tail[i], nodes[t])
+            tail[i] = nodes[t]
+
+# q 개의 문자대로 시뮬레이션을 진행합니다.
 for _ in range(q):
-    command = list(map(int, input().split()))
-    if command[0] == 1:
-        a, b = command[1], command[2]
-        for li in line:
-            node_a = li.find(a)
-            if node_a:
-                li.pop(a)
-                break
-        for li in line:
-            node_b = li.find(b)
-            if node_b:
-                li.insert_prev(b, a)
-        
-    elif command[0] == 2:
-        a = command[1]
-        for li in line:
-            node_a = li.find(a)
-            if node_a:
-                li.pop(a)
-                break
-    elif command[0] == 3:
-        a, b, c = command[1], command[2], command[3]
-        for li in line:
-            node_a = li.find(a)
-            node_b = li.find(b)
-            if node_a:
-                li.connect(node_a.prev, node_b.next)
-                node_a.prev = node_b.next = None
-                break
-        for li in line:
-            node_c = li.find(c)
-            if node_c:
-                li.connect(node_c.prev, node_a)
-                li.connect(node_b, node_c)
-                break
-for dlst in line:
-    dlst.display()
+    option = list(map(int, input().split()))
+
+    if option[0] == 1:
+        a, b = option[1], option[2]
+        insertFront(nodes[a], nodes[b])
+    elif option[0] == 2:
+        a = option[1]
+        pop(nodes[a])
+    elif option[0] == 3:
+        a, b, c = option[1], option[2], option[3]
+        popRangeAndInsertPrev(nodes[a], nodes[b], nodes[c])
+
+# 출력
+for i in range(1, m + 1):
+    printLine(i)
