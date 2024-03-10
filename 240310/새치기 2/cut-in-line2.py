@@ -104,16 +104,15 @@ for _ in range(q):
                 break
     elif command[0] == '3':
         a, b, c = command[1], command[2], command[3]
-        temp = []
         for li in line:
             node_a = li.find(a)
             node_b = li.find(b)
             if node_a:
-                if node_a.prev is not None:
+                if node_a.prev:
                     node_a.prev.next = node_b.next
                 else:
                     li.head = node_b.next
-                if node_b.next is not None:
+                if node_b.next:
                     node_b.next.prev = node_a.prev
                 else:
                     li.tail = node_a.prev
@@ -121,7 +120,7 @@ for _ in range(q):
         for li in line:
             node_c = li.find(c)
             if node_c:
-                if node_c.prev is not None:
+                if node_c.prev:
                     node_c.prev.next = node_a
                 else:
                     li.head = node_a
