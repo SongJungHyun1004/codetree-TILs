@@ -61,25 +61,13 @@ class DList:
     def connect(self, s, e):
         if s:
             s.next = e
+        else:
+            self.head = e
         if e:
             e.prev = s
+        else:
+            self.tail = s
             
-
-# def pop_range_and_insert_prev(s, e, v):
-#     # Step 1
-#     # s의 이전 노드와 e의 다음 노드를 이어줌
-#     connect(s.prev, e.next)
-
-#     # 이제, s의 이전 노드와 e의 다음 노드를 nullptr로 설정
-#     s.prev = e.next = None
-
-#     # Step 2
-#     # v의 이전 노드와 s를 이어줌
-#     connect(v.prev, s)
-    
-#     # e와 v를 이어줌
-#     connect(e, v)
-
 n, m, q = map(int, input().split())
 x = n//m
 line = [DList() for _ in range(m)]
