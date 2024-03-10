@@ -57,6 +57,13 @@ class DList:
             print(current.data, end=' ')
             current = current.next
         print()
+    
+    def connect(self, s, e):
+        if s:
+            s.next = e
+        if e:
+            e.prev = s
+            
 
 # def pop_range_and_insert_prev(s, e, v):
 #     # Step 1
@@ -108,24 +115,14 @@ for _ in range(q):
             node_a = li.find(a)
             node_b = li.find(b)
             if node_a:
-                if node_a.prev:
-                    node_a.prev.next = node_b.next
-                else:
-                    li.head = node_b.next
-                if node_b.next:
-                    node_b.next.prev = node_a.prev
-                else:
-                    li.tail = node_a.prev
+                li.connect(node_a.prev, node_b.next)
+                node_a.prev = node_b.next = None
                 break
         for li in line:
             node_c = li.find(c)
             if node_c:
-                if node_c.prev:
-                    node_c.prev.next = node_a
-                else:
-                    li.head = node_a
-                node_b.next = node_c
-                node_c.prev = node_b
+                li.connect(node_c.prev, node_a)
+                li.connect(node_b, node_c)
                 break
 for dlst in line:
     dlst.display()
