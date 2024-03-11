@@ -1,6 +1,7 @@
 import heapq as hq
 import sys
 INF = sys.maxsize
+input = sys.stdin.readline
 n, m = map(int, input().split())
 graph = [
     []
