@@ -22,4 +22,7 @@ while pq:
             hq.heappush(pq, (dist[nxt], nxt))
 
 for i in range(2, n+1):
-    print(dist[i])
+    if dist[i] == INF:
+        print(-1)
+    else:
+        print(dist[i])
