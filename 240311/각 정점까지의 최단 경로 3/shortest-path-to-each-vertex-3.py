@@ -16,6 +16,8 @@ for i in range(1, n+1):
     hq.heappush(pq, (dist[i], i))
 while pq:
     now_d, now = hq.heappop(pq)
+    if dist[now] < now_d:
+        continue
     for nxt, nxt_d in graph[now]:
         if dist[nxt] > now_d + nxt_d:
             dist[nxt] = now_d + nxt_d
