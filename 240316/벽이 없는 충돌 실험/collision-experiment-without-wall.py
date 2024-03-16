@@ -82,7 +82,7 @@ for _ in range(t):
                         new_marbles[prev_num] = (nx, ny, prev_w, prev_d)
                 else:
                     new_marbles[prev_num] = (nx, ny, prev_w, prev_d)
-        marbles = copy.deepcopy(new_marbles)
+        marbles = new_marbles
         if isEnd(marbles):
             break
     print(last_crash)
