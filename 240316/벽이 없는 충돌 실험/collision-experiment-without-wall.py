@@ -22,7 +22,8 @@ def can_crash(m1, m2):
             (d1==2 and d2==3 and x1>x2 and y1>y2) or \
             (d1==3 and d2==2 and x1<x2 and y1<y2) or \
             (d1==3 and d2==0 and x1>x2 and y1<y2):
-            return True
+            if abs(x1-x2) == abs(y1-y2):
+                return True
     return False
 
 def isEnd(marbles):
@@ -34,9 +35,7 @@ def isEnd(marbles):
         x, y, _, d = v
         lst.append((x,y,d))
     for i in range(len(lst)):
-        for j in range(len(lst)):
-            if i == j:
-                continue
+        for j in range(i+1, len(lst)):
             if can_crash(lst[i], lst[j]):
                 return False
     return True
@@ -56,7 +55,6 @@ for _ in range(t):
         x, y, w, d = input().split()
         x = int(x)*2; y = int(y)*2; w = int(w); d = direction[d]
         marbles[i+1] = (x, y, w, d)
-    
     sec = 0
     while True:
         new_marbles = {}
@@ -67,23 +65,23 @@ for _ in range(t):
             nx, ny = x + dxs[d], y + dys[d]
             if (nx, ny) not in new_pos:
                 new_marbles[num] = (nx, ny, w, d)
-                new_pos[(nx, ny)] = (w, num)
+                new_pos[(nx, ny)] = (w, num, d)
             else:
                 last_crash = sec
-                prev_w, prev_num = new_pos[(nx, ny)]
+                prev_w, prev_num, prev_d = new_pos[(nx, ny)]
                 if prev_w < w:
                     new_marbles[num] = (nx, ny, w, d)
-                    new_pos[(nx, ny)] = (w, num)
+                    new_pos[(nx, ny)] = (w, num, d)
                     del new_marbles[prev_num]
                 elif prev_w == w:
                     if prev_num < num:
                         new_marbles[num] = (nx, ny, w, d)
-                        new_pos[(nx, ny)] = (w, num)
+                        new_pos[(nx, ny)] = (w, num, d)
                         del new_marbles[prev_num]
                     else:
-                        new_marbles[prev_num] = (nx, ny, prev_w, d)
+                        new_marbles[prev_num] = (nx, ny, prev_w, prev_d)
                 else:
-                    new_marbles[prev_num] = (nx, ny, prev_w, d)
+                    new_marbles[prev_num] = (nx, ny, prev_w, prev_d)
         marbles = copy.deepcopy(new_marbles)
         if isEnd(marbles):
             break
