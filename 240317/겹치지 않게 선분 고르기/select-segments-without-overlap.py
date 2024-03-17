@@ -9,8 +9,8 @@ selected = []
 def is_ok(selected):
     for i in range(len(selected)):
         for j in range(i+1, len(selected)):
-            s1, e1 = lst[i]
-            s2, e2 = lst[j]
+            s1, e1 = lst[selected[i]]
+            s2, e2 = lst[selected[j]]
             if e1 >= s2:
                 return False
     return True
@@ -19,7 +19,7 @@ def choose(i):
     global mx
     if i == n:
         if is_ok(selected):
-            mx = max(mx, sum(selected))
+            mx = max(mx, len(selected))
         return
     
     selected.append(i)
@@ -27,6 +27,6 @@ def choose(i):
     selected.pop()
     choose(i+1)
 
-mx = 0
+mx = 1
 choose(0)
 print(mx)
