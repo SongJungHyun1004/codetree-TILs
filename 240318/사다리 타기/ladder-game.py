@@ -7,7 +7,7 @@ for _ in range(m):
 def make_ladder(info):
     ladder = [
         [0]*(n+1)
-        for _ in range(m+1)
+        for _ in range(16)
     ]
     for a, b in info:
         ladder[b][a] = 1
@@ -18,8 +18,8 @@ def simulate(ladder):
     result = []
     for num in range(1, n+1):
         i = 1; j = num
-        while i <= m:
-            while i < m and ladder[i][j] == 0:
+        while i <= 15:
+            while i < 15 and ladder[i][j] == 0:
                 i += 1
             if ladder[i][j] == 1:
                 j += 1
@@ -38,15 +38,14 @@ selected = []
 mn = m
 def choose(i):
     global mn
-    if i == m+1:
+    if i == m:
         if result == simulate(make_ladder(selected)):
             mn = min(mn, len(selected))
         return
-    for jj in range(1, n):
-        if (jj-1, i) not in selected:
-            selected.append((jj, i))
-            choose(i+1)
-            selected.pop()
-            choose(i+1)
-choose(1)
+    selected.append(init_info[i])
+    choose(i+1)
+    selected.pop()
+    choose(i+1)
+                
+choose(0)
 print(mn)
