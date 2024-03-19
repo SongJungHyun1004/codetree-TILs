@@ -36,7 +36,7 @@ for i in range(n):
                     choose(0, stuffs2)
                     mx = max(mx, tmp+value)
             else:
-                for l in range(j, n-m+1):
+                for l in range(n-m+1):
                     stuffs2 = room[k][l:l+m]
                     value = 0
                     choose(0, stuffs1)
