@@ -1,25 +1,21 @@
 n = int(input())
-players = []
-for _ in range(n):
-    s, b = map(int, input().split())
-    players.append((s, b))
+abilities = [tuple(map(int, input().split())) for _ in range(n)]
 
-# 축구 능력과 야구 능력의 차이를 기준으로 정렬
-players.sort(key=lambda x: abs(x[0] - x[1]), reverse=True)
+# dp[i][j][k] = i번째 학생까지 고려했을 때, 축구팀에 j명, 야구팀에 k명이 할당된 상태에서의 능력치 합의 최대값
+dp = [[[0 for _ in range(10)] for _ in range(12)] for _ in range(n+1)]
 
-# 축구팀과 야구팀의 능력 합
-soccer_sum, baseball_sum = 0, 0
+for i in range(1, n+1):
+    s, b = abilities[i-1]
+    for j in range(12):
+        for k in range(10):
+            # i번째 학생을 축구팀에 할당하는 경우
+            if j > 0:
+                dp[i][j][k] = max(dp[i][j][k], dp[i-1][j-1][k] + s)
+            # i번째 학생을 야구팀에 할당하는 경우
+            if k > 0:
+                dp[i][j][k] = max(dp[i][j][k], dp[i-1][j][k-1] + b)
+            # i번째 학생을 할당하지 않는 경우
+            dp[i][j][k] = max(dp[i][j][k], dp[i-1][j][k])
 
-# 축구팀과 야구팀에 선수 할당
-soccer_count, baseball_count = 0, 0
-for s, b in players:
-    # 축구팀이나 야구팀 중 어디에 할당할지 결정
-    if (s > b and soccer_count < 11) or baseball_count == 9:
-        soccer_sum += s
-        soccer_count += 1
-    else:
-        baseball_sum += b
-        baseball_count += 1
-
-# 결과 출력
-print(soccer_sum + baseball_sum)
+# 축구팀 11명, 야구팀 9명이 할당된 상태에서의 최대 능력치 합
+print(dp[n][11][9])
