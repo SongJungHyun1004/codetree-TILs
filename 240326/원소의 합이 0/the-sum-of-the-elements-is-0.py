@@ -15,13 +15,11 @@ for i in range(n):
             group1[s] += 1
         else:
             group1[s] = 1
-for i in range(n):
-    for j in range(n):
-        s = c[i]+d[j]
-        if s in group2:
-            group2[s] += 1
+        s2 = c[i]+d[j]
+        if s2 in group2:
+            group2[s2] += 1
         else:
-            group2[s] = 1
+            group2[s2] = 1
 cnt = 0
 for i in group1.keys():
     for j in group2.keys():
