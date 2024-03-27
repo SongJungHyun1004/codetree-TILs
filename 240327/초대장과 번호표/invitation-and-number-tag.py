@@ -13,7 +13,8 @@ for i in range(g):
 groups = sorted(groups)
 invited = set()
 invited.add(1)
-for grp in groups:
-    if len(grp-invited) == 1:
-        invited = invited.union(grp)
+for _ in range(g):
+    for grp in groups:
+        if len(grp-invited) == 1:
+            invited = invited.union(grp)
 print(len(invited))
