@@ -1,3 +1,4 @@
+from collections import deque
 n, g = map(int, input().split())
 groups = [
     set()
@@ -10,11 +11,16 @@ info = [
 for i in range(g):
     for j in range(1, len(info[i])):
         groups[i].add(info[i][j])
-groups = sorted(groups)
-invited = set()
-invited.add(1)
-for _ in range(g):
+groups = sorted(groups, key=lambda x: len(x))
+invited = deque([1])
+ans = 1
+while invited:
+    p = invited.popleft()
     for grp in groups:
-        if len(grp-invited) == 1:
-            invited = invited.union(grp)
-print(len(invited))
+        grp.discard(p)
+        if len(grp) == 1:
+            new = grp.pop()
+            if new not in invited:
+                invited.append(new)
+                ans += 1
+print(ans)
