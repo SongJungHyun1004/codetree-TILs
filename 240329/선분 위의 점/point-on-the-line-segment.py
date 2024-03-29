@@ -1,5 +1,5 @@
 n, m = map(int, input().split())
-arr = list(map(int, input().split()))
+arr = sorted(list(map(int, input().split())))
 
 def lower_bound(target):
     left = 0
