@@ -14,7 +14,7 @@ def isPossible(mid):
 
 def binary_search():
     left = 1
-    right = 10**9
+    right = 10**10
     mn = right
     while left <= right:
         mid = (left+right)//2
