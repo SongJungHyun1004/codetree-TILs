@@ -1,6 +1,6 @@
 import sys
 input = sys.stdin.readline
-
+INT_MAX = sys.maxsize
 n, m = map(int, input().split())
 cost = []
 for _ in range(m):
@@ -14,7 +14,7 @@ def isPossible(mid):
 
 def binary_search():
     left = 1
-    right = 10**10
+    right = INT_MAX
     mn = right
     while left <= right:
         mid = (left+right)//2
