@@ -12,15 +12,9 @@ def isPossible(mid):
     cnt = 0
     last = INT_MIN
     for a, b in lines:
-        if a <= last+mid <= b:
-            last += mid
-            cnt += 1
-        elif last + mid < a:
-            last = a
-            cnt += 1
         while last + mid <= b:
-            last += mid
             cnt += 1
+            last = max(a, last + mid)
             if cnt >= n:
                 return True
     return cnt >= n
