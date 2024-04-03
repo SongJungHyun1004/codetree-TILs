@@ -1,20 +1,28 @@
 import sys
 input = sys.stdin.readline
+INT_MIN = -sys.maxsize
 n, m = map(int, input().split())
 lines = []
 for _ in range(m):
     a, b = map(int, input().split())
-    for x in range(a, b+1):
-        lines.append(x)
+    lines.append((a, b))
 lines = sorted(lines)
 
 def isPossible(mid):
-    pre = lines[0]
-    cnt = 1
-    for nxt in lines[1:]:
-        if nxt - pre >= mid:
+    cnt = 0
+    last = INT_MIN
+    for a, b in lines:
+        if a <= last+mid <= b:
+            last += mid
             cnt += 1
-            pre = nxt
+        elif last + mid < a:
+            last = a
+            cnt += 1
+        while last + mid <= b:
+            last += mid
+            cnt += 1
+            if cnt >= n:
+                return True
     return cnt >= n
 
 def binary_search():
