@@ -40,12 +40,12 @@ def isPossible(mid):
 def binary_search():
     left = 0
     right = 10**6
-    d = 0
+    d = right
     while left <= right:
         mid = (left+right)//2
         if isPossible(mid):
             right = mid - 1
-            d = mid
+            d = min(d, mid)
         else:
             left = mid + 1
     return d
