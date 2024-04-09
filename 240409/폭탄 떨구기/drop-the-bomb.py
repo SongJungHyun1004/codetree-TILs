@@ -5,14 +5,15 @@ for _ in range(n):
 dots.sort()
 
 def isPossible(mid):
+    cnt = 1
     idx = 0
-    for _ in range(k):
-        cover = dots[idx]+2*mid
-        while dots[idx] <= cover:
-            idx += 1
-            if idx == n:
-                return True
-    return False
+    for i in range(n):
+        if dots[i]-dots[idx] <= 2*mid:
+            continue
+        else:
+            cnt += 1
+            idx = i
+    return cnt <= k
 
 def binary_search():
     left = 0
