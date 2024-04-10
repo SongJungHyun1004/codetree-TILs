@@ -21,9 +21,21 @@ while pq:
         a, _, t = heappop(pq)
         last = a + t
     else:
+        _, a, t = heappop(waiting)
+        wait = last - a
+        mx = max(mx, wait)
+        last += t
+        if pq and last > pq[0][0]:
+            continue
+        flag = 0
         while waiting:
             _, a, t = heappop(waiting)
             wait = last - a
             mx = max(mx, wait)
             last += t
+            if pq and last > pq[0][0]:
+                flag = 1
+                break
+        if flag:
+            continue
 print(mx)
