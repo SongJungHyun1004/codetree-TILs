@@ -4,7 +4,7 @@ n = int(input())
 arr = sorted(list(map(int, input().split())))
 m = 2*10**9
 i = 0; j = n-1
-while i <= j:
+while i < j:
     s = arr[i] + arr[j]
     if s == 0:
         print(0)
