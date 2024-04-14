@@ -8,7 +8,6 @@ graph = [
 ]
 for _ in range(m):
     i, j, d = map(int, input().split())
-    graph[i].append((j, d))
     graph[j].append((i, d))
 
 def dijkstra(src):
