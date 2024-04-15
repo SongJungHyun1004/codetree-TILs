@@ -6,7 +6,7 @@ def isPossible(mid):
     pre = arrive[0]
     people = 1
     for t in arrive[1:]:
-        if mid >= t-pre and people <= c:
+        if mid >= t-pre and people+1 <= c:
             people += 1
         else:
             pre = t
