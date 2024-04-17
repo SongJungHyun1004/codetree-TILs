@@ -11,4 +11,4 @@ for i in range(n):
         j += 1
     if j < n:
         mn = min(mn, abs(pos[i][0]-pos[j][0]))
-print(mn)
+print(mn) if mn != float('inf') else print(-1)
