@@ -23,7 +23,7 @@ def binary_search():
     mn = right
     i = 0
     while left <= right:
-        if i == 50:
+        if i == 30:
             break
         mid = (left+right)//2
         if isPossible(mid):
