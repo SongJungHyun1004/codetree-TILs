@@ -1,37 +1,26 @@
 import math
-n = int(input())
-x = list(map(int, input().split()))
-v = list(map(int, input().split()))
-info = list(zip(x, v))
-info.sort()
 
-def isPossible(mid):
-    first = info[0][0]
-    last = info[-1][0]
-    for p in range(first, last+1):
-        mx = -1
-        for x, v in info:
-            time = abs(x-p)/v
-            mx = max(mx, time)
-        if mx <= mid:
-            return True
-    return False
+n = int(input())
+positions = list(map(int, input().split()))
+speeds = list(map(int, input().split()))
+
+def can_meet(mid):
+    left_most = -math.inf
+    right_most = math.inf
+    for position, speed in zip(positions, speeds):
+        left_most = max(left_most, position - mid * speed)
+        right_most = min(right_most, position + mid * speed)
+    return left_most <= right_most
 
 def binary_search():
-    left = 0.00000
-    right = 1000000000.00000
-    mn = right
-    i = 0
-    while left <= right:
-        if i == 30:
-            break
-        mid = (left+right)//2
-        if isPossible(mid):
-            right = mid - 1
-            mn = min(mn, mid)
+    left = 0
+    right = 1e9  # 최대 가능 거리
+    while right - left > 1e-6:  # 정밀도 조정
+        mid = (left + right) / 2
+        if can_meet(mid):
+            right = mid
         else:
-            left = mid + 1
-        i += 1
-    return format(mn, '.4f')
+            left = mid
+    return right
 
-print(binary_search())
+print(f'{binary_search():.4f}')
