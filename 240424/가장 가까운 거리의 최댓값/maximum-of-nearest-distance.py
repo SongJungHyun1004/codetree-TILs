@@ -28,11 +28,13 @@ def dijkstra(src):
                 heappush(pq, (dist[nxt], nxt))
     return dist
 
+dist_a = dijkstra(a)
+dist_b = dijkstra(b)
+dist_c = dijkstra(c)
+
 mx = 0
 for i in range(1, n+1):
-    if i in [a, b, c]:
-        continue
-    dist = dijkstra(i)
-    mn_dist = min(dist[a], dist[b], dist[c])
-    mx = max(mx, mn_dist)
+    min_dist = min(dist_a[i], dist_b[i], dist_c[i])
+    mx = max(mx, min_dist)
+
 print(mx)
