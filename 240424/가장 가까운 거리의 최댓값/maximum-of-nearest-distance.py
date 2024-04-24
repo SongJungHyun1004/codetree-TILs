@@ -13,7 +13,7 @@ for _ in range(m):
     graph[s].append((e, d))
     graph[e].append((s, d))
 
-def dijkstra(src, dst):
+def dijkstra(src):
     dist = [INF]*(n+1)
     dist[src] = 0
     pq = []
@@ -26,10 +26,11 @@ def dijkstra(src, dst):
             if dist[nxt] > now_d + nxt_d:
                 dist[nxt] = now_d + nxt_d
                 heappush(pq, (dist[nxt], nxt))
-    return dist[dst]
+    return dist
 
 mx = 0
 for i in range(1, n+1):
-    mn_dist = min(dijkstra(a, i), dijkstra(b, i), dijkstra(c, i))
+    dist = dijkstra(i)
+    mn_dist = min(dist[a], dist[b], dist[c])
     mx = max(mx, mn_dist)
 print(mx)
