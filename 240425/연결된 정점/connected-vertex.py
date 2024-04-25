@@ -13,10 +13,12 @@ def union(x, y):
     X = find(x)
     Y = find(y)
     if X != Y:
-        uf[x][0] = y
-        tmp = uf[x][1]+uf[y][1]
-        uf[x][1] = tmp
-        uf[y][1] = tmp
+        if X < Y:
+            X, Y = Y, X
+        uf[X][0] = Y
+        tmp = uf[X][1]+uf[Y][1]
+        uf[X][1] = tmp
+        uf[Y][1] = tmp
     
 for _ in range(m):
     command = list(input().split())
