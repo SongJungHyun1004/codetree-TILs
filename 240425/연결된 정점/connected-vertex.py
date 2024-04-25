@@ -14,8 +14,9 @@ def union(x, y):
     Y = find(y)
     if X != Y:
         uf[x][0] = y
-        uf[x][1] += 1
-        uf[y][1] += 1
+        tmp = uf[x][1]+uf[y][1]
+        uf[x][1] = tmp
+        uf[y][1] = tmp
     
 for _ in range(m):
     command = list(input().split())
