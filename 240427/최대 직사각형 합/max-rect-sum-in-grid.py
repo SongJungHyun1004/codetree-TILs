@@ -10,9 +10,10 @@ for i in range(1, n+1):
 
 mx = float('-inf')
 for i in range(1, n+1):
-    for j in range(1, n+1):
-        for k in range(i, n+1):
-            for l in range(j, n+1):
-                s = prefix[k][l] - prefix[k][j-1] - prefix[i-1][l] + prefix[i-1][j-1]
-                mx = max(mx, s)
+    for j in range(i, n+1):
+        tmp = 0
+        for k in range(1, n+1):
+            s = prefix[j][k] - prefix[i-1][k] - prefix[j][k-1] + prefix[i-1][k-1]
+            tmp = max(s, tmp+s)
+            mx = max(mx, tmp)
 print(mx)
