@@ -8,7 +8,7 @@ for i in range(1, n+1):
     for j in range(1, n+1):
         prefix[i][j] = grid[i][j]+prefix[i-1][j]+prefix[i][j-1]-prefix[i-1][j-1]
 
-mx = 0
+mx = float('-inf')
 for i in range(1, n+1):
     for j in range(1, n+1):
         for k in range(i, n+1):
