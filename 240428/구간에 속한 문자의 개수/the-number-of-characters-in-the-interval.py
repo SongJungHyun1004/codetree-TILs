@@ -16,8 +16,8 @@ for i in range(1, n+1):
 prefix = [[[0, 0, 0] for _ in range(n+1)] for _ in range(n+1)]
 for i in range(1, n+1):
     for j in range(1, n+1):
-        for k in range(3):
-            prefix[i][j][k] = grid[i][j][k] + prefix[i-1][j][k] + prefix[i][j-1][k] - prefix[i-1][j-1][k]
+        for kk in range(3):
+            prefix[i][j][kk] = grid[i][j][kk] + prefix[i-1][j][kk] + prefix[i][j-1][kk] - prefix[i-1][j-1][kk]
 
 for _ in range(k):
     r1, c1, r2, c2 = map(int, input().split())
