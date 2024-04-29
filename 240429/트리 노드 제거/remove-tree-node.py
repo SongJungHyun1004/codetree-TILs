@@ -1,3 +1,5 @@
+import sys
+sys.setrecursionlimit(10**5)
 n = int(input())
 parent = list(map(int, input().split()))
 remove = int(input())
@@ -14,7 +16,7 @@ tree = [
     for _ in range(n)
 ]
 for i in range(n):
-    if parent[i] > 0:
+    if parent[i] >= 0:
         tree[i].append(parent[i])
         tree[parent[i]].append(i)
 
