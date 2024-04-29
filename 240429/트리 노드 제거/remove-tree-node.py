@@ -1,18 +1,20 @@
 n = int(input())
 parent = list(map(int, input().split()))
 remove = int(input())
-
+root = 0
 for i in range(n):
+    if parent[i] == -1:
+        root = i
     if parent[i] == remove:
-        parent[i] = -1
-parent[remove] = -1
+        parent[i] = -2
+parent[remove] = -2
 
 tree = [
     []
     for _ in range(n)
 ]
 for i in range(n):
-    if parent[i] != -1:
+    if parent[i] > 0:
         tree[i].append(parent[i])
         tree[parent[i]].append(i)
 
@@ -29,6 +31,6 @@ def dfs(x):
 
 visited = [False]*n
 cnt = 0
-if tree[0]:
-    dfs(0)
+if tree[root]:
+    dfs(root)
 print(cnt)
