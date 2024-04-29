@@ -29,5 +29,6 @@ def dfs(x):
 
 visited = [False]*n
 cnt = 0
-dfs(0)
+if tree[0]:
+    dfs(0)
 print(cnt)
