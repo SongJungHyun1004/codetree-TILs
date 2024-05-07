@@ -16,5 +16,5 @@ for i in range(1, n+1):
 
 ans = 0
 for j in range(10):
-    ans += dp[n][j] % MOD
+    ans = (ans + dp[n][j]) % MOD
 print(ans)
