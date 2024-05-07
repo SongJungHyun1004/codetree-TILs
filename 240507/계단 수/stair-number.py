@@ -1,14 +1,20 @@
 MOD = 10**9+7
 n = int(input())
-dp = [0]*(n+1)
-dp[1] = 9
-if n == 1:
-    print(dp[1])
-    exit(0)
-dp[2] = 17
-for i in range(3, n+1):
-    if i%2 == 1:
-        dp[i] = dp[i-1]
-    else:
-        dp[i] = dp[i-2]*2%MOD
-print(dp[n])
+dp = [
+    [0]*10
+    for _ in range(n+1)
+]
+for i in range(1, 10):
+    dp[1][i] = 1
+
+for i in range(1, n+1):
+    for j in range(10):
+        if j < 9:
+            dp[i][j] = (dp[i-1][j+1]+dp[i][j]) % MOD
+        if j > 0:
+            dp[i][j] = (dp[i-1][j-1]+dp[i][j]) % MOD
+
+ans = 0
+for j in range(10):
+    ans += dp[n][j] % MOD
+print(ans)
