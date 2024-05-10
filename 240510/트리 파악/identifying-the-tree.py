@@ -1,6 +1,6 @@
 import sys
 input = sys.stdin.readline
-sys.setrecursionlimit(10**4)
+sys.setrecursionlimit(10**5)
 
 n = int(input())
 tree = [[] for _ in range(n+1)]
@@ -12,15 +12,14 @@ for _ in range(n-1):
     tree[e].append(s)
 
 def dfs(x):
+    global result
+    if len(tree[x]) == 1:
+        result += dist[x]
     visited[x] = True
     for nx in tree[x]:
         if not visited[nx]:
             dist[nx] = dist[x]+1
             dfs(nx)
-
-dfs(1)
 result = 0
-for x in range(1, n+1):
-    if len(tree[x]) == 1:
-        result += dist[x]
+dfs(1)
 print(1 if result % 2 else 0)
