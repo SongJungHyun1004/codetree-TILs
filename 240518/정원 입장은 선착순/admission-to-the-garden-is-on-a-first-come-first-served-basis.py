@@ -1,6 +1,6 @@
 import sys
 input = sys.stdin.readline
-
+MAX = sys.maxsize
 from heapq import heappush, heappop
 
 n = int(input())
@@ -8,6 +8,7 @@ info = []
 for i in range(n):
     a, t = map(int, input().split())
     info.append((a, i, t))
+info.append((MAX, n, 0))
 info.sort()
 
 pq = []
