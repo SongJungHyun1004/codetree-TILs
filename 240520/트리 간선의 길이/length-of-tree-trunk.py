@@ -12,7 +12,6 @@ def dfs(x, dist):
     for nx, nd in tree[x]:
         if not visited[nx]:
             dfs(nx, dist+nd)
-    visited[x] = False
 
 ans = 0
 for i in range(1, n+1):
