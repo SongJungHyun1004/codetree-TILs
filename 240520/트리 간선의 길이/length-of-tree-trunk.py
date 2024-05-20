@@ -1,3 +1,7 @@
+import sys
+sys.setrecursionlimit(10**5)
+input = sys.stdin.readline
+
 n = int(input())
 tree = [[] for _ in range(n+1)]
 for _ in range(n-1):
