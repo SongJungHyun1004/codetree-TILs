@@ -17,8 +17,8 @@ def union(a, b):
 for _ in range(n-2):
     s, e = map(int, input().split())
     union(s, e)
-
+    
 for i in range(2, n+1):
-    if uf[i] != uf[1]:
+    if find(i) != find(1):
         print(1, i)
         break
