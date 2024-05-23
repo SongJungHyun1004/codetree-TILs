@@ -1,5 +1,6 @@
 import sys
 input = sys.stdin.readline
+sys.setrecursionlimit(10**5)
 
 n, m = map(int, input().split())
 uf = [i for i in range(n+1)]
