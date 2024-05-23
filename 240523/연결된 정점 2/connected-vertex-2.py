@@ -18,4 +18,4 @@ def union(a, b):
 for _ in range(n):
     a, b = map(int, input().split())
     union(a, b)
-    print(find(uf[a][1]))
+    print(uf[find(a)][1])
