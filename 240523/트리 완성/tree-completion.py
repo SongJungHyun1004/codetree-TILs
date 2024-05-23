@@ -1,6 +1,5 @@
 import sys
 input = sys.stdin.readline
-sys.setrecursionlimit(10**5)
 
 n, m = map(int, input().split())
 uf = [i for i in range(n+1)]
@@ -13,8 +12,10 @@ def find(x):
 def union(a, b):
     x = find(a)
     y = find(b)
-    if x != y:
+    if x > y:
         uf[x] = y
+    else:
+        uf[y] = x
 
 cut = 0
 for _ in range(m):
