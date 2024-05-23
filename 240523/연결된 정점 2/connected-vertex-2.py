@@ -12,6 +12,8 @@ def union(a, b):
     x = find(a)
     y = find(b)
     if x != y:
+        if x < y:
+            x, y = y, x
         uf[x][0] = y
         uf[y][1] += uf[x][1]
 
