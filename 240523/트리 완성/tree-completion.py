@@ -17,19 +17,15 @@ def union(a, b):
     else:
         uf[y] = x
 
-cut = 0
+# 최대로 사용할 간선
+mx_cnt = 0
 for _ in range(m):
     s, e = map(int, input().split())
     if find(s) != find(e):
         union(s, e)
-    else:
-        cut += 1
+        mx_cnt += 1
 
-connect = 0
-parents = [find(1)]
-for i in range(2, n+1):
-    if not find(i) in parents:
-        parents.append(find(i))
-        connect += 1
+# 제거되어야 할 간선 m - mx_cnt
+# 추가되어야 할 간선 n-1 - mx_cnt
 
-print(cut+connect)
+print(m - mx_cnt + n-1 - mx_cnt)
