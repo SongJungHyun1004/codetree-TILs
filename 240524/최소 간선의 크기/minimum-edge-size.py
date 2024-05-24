@@ -9,37 +9,20 @@ for _ in range(m):
     edges.append((i, j, s))
 edges.sort(key=lambda x:-x[2])
 
-def find(x, uf):
+def find(x):
     if x == uf[x]:
         return x
-    uf[x] = find(uf[x], uf)
+    uf[x] = find(uf[x])
     return uf[x]
 
-def union(i, j, uf):
-    x = find(i, uf)
-    y = find(j, uf)
+def union(i, j):
+    x = find(i)
+    y = find(j)
     uf[x] = y
 
-def isPossible(mid):
-    uf = [i for i in range(n+1)]
-    for i, j, s in edges:
-        if s >= mid:
-            union(i, j, uf)
-        if find(a, uf) == find(b, uf):
-            return True
-    return False
-
-def binary_search():
-    left = 1
-    right = 10**9
-    mx = left
-    while left <= right:
-        mid = (left+right)//2
-        if isPossible(mid):
-            left = mid+1
-            mx = max(mx, mid)
-        else:
-            right = mid-1
-    return mx
-
-print(binary_search())
+uf = [i for i in range(n+1)]
+for i, j, s in edges:
+    union(i, j)
+    if find(a) == find(b):
+        print(s)
+        break
