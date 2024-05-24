@@ -1,26 +1,45 @@
 import sys
 input = sys.stdin.readline
-sys.setrecursionlimit(10**5)
 INF = sys.maxsize
 n, m = map(int, input().split())
 a, b = map(int, input().split())
-tree = [[] for i in range(n+1)]
+edges = []
 for _ in range(m):
     i, j, s = map(int, input().split())
-    tree[i].append((j, s))
-    tree[j].append((i, s))
+    edges.append((i, j, s))
+edges.sort(key=lambda x:-x[2])
 
-def dfs(x, mn):
-    global mx
-    visited[x] = True
-    if x == b:
-        mx = max(mx, mn)
-    for nx, s in tree[x]:
-        if not visited[nx]:
-            dfs(nx, min(mn, s))
-    visited[x] = False
+def find(x, uf):
+    if x == uf[x]:
+        return x
+    uf[x] = find(uf[x], uf)
+    return uf[x]
 
-visited = [False]*(n+1)
-mx = 0
-dfs(a, INF)
-print(mx)
+def union(i, j, uf):
+    x = find(i, uf)
+    y = find(j, uf)
+    uf[x] = y
+
+def isPossible(mid):
+    uf = [i for i in range(n+1)]
+    for i, j, s in edges:
+        if s >= mid:
+            union(i, j, uf)
+        if find(a, uf) == find(b, uf):
+            return True
+    return False
+
+def binary_search():
+    left = 1
+    right = 10**9
+    mx = left
+    while left <= right:
+        mid = (left+right)//2
+        if isPossible(mid):
+            left = mid+1
+            mx = max(mx, mid)
+        else:
+            right = mid-1
+    return mx
+
+print(binary_search())
