@@ -21,7 +21,7 @@ def dfs(x, y, h):
         if in_range(nx, ny) and not visited[nx][ny] and grid[nx][ny] > h:
             dfs(nx, ny, h)
 
-mx_zone = 0
+ans, mx_zone = 1, 0
 for k in range(1, MAX_HEIGHT+1):
     visited = [[False]*m for _ in range(n)]
     zone = 0
