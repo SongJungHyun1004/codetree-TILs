@@ -38,7 +38,9 @@ def bfs(x, y):
     return mx_x, mx_y
 
 for _ in range(k):
-    r, c = bfs(r, c)
-    if (r, c) == (-1, -1):
-        break
+    nr, nc = bfs(r, c)
+    if (nr, nc) == (-1, -1):
+        print(r, c)
+        exit(0)
+    r, c = nr, nc
 print(r, c)
