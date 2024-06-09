@@ -1,43 +1,36 @@
 import sys
-INF = sys.maxsize
 from heapq import heappush, heappop
 
-n, m = map(int, input().split())
-graph = [[] for _ in range(n+1)]
-visited = [[False]*(n+1) for _ in range(n+1)]
+def dijkstra(start, end, avoided_edges):
+    dist = [sys.maxsize] * (n + 1)
+    dist[start] = 0
+    heap = [(0, start)]
+    
+    while heap:
+        curr_dist, curr_node = heappop(heap)
+        
+        if curr_dist > dist[curr_node]:
+            continue
+        
+        for next_node, next_dist in graph[curr_node]:
+            if (curr_node, next_node) not in avoided_edges and dist[next_node] > curr_dist + next_dist:
+                dist[next_node] = curr_dist + next_dist
+                heappush(heap, (dist[next_node], next_node))
+    
+    return dist[end]
+
+n, m = map(int, sys.stdin.readline().split())
+graph = [[] for _ in range(n + 1)]
+avoided_edges = set()
+
 for _ in range(m):
-    s, e, d = map(int, input().split())
+    s, e, d = map(int, sys.stdin.readline().split())
     graph[s].append((e, d))
     graph[e].append((s, d))
 
-def dijkstra(src, dst):
-    dist = [INF]*(n+1)
-    dist[src] = 0
-    pq = []
-    heappush(pq, (0, src))
-    while pq:
-        now_d, now = heappop(pq)
-        if dist[now] < now_d:
-            continue
-        for nxt, nxt_d in graph[now]:
-            if not visited[now][nxt] and dist[nxt] > now_d + nxt_d:
-                dist[nxt] = now_d + nxt_d
-                heappush(pq, (dist[nxt], nxt))
-    return dist
+dist1 = dijkstra(1, n, avoided_edges)
+for u, v in graph[1]:
+    avoided_edges.add((1, v))
 
-dist = dijkstra(1, n)
-path = [n]
-x = n
-while x != 1:
-    for i, d in graph[x]:
-        if dist[i]+d == dist[x]:
-            x = i
-            path.append(x)
-            break
-for i in range(1, len(path)):
-    frm, to = path[i-1], path[i]
-    visited[frm][to] = True
-    visited[to][frm] = True
-    
-dist = dijkstra(1, n)
-print(-1 if dist[n] == INF else dist[n])
+dist2 = dijkstra(1, n, avoided_edges)
+print(-1 if dist2 == sys.maxsize else dist2)
