@@ -9,8 +9,6 @@ for _ in range(m):
     s, e, d = map(int, input().split())
     graph[s].append((e, d))
     graph[e].append((s, d))
-for i in range(n+1):
-    graph[i].sort(reverse=True)
 
 def dijkstra(src, dst):
     dist = [INF]*(n+1)
@@ -28,18 +26,26 @@ def dijkstra(src, dst):
     return dist
 
 dist = dijkstra(1, n)
-path = [n]
-x = n
-while x != 1:
-    for i, d in graph[x]:
-        if dist[i]+d == dist[x]:
-            x = i
-            path.append(x)
-            break
+
+
+def get_all_paths():
+    paths = []
+    stack = [(n, [n])]
+    while stack:
+        node, path = stack.pop()
+        if node == 1:
+            paths.append(path)
+            continue
+        for neighbor, weight in graph[node]:
+            if dist[neighbor] == dist[node] - weight:
+                stack.append((neighbor, [neighbor] + path))
+    return paths
+
+path = sorted(get_all_paths())[0]
 for i in range(1, len(path)):
     frm, to = path[i-1], path[i]
     visited[frm][to] = True
     visited[to][frm] = True
-    
+
 dist = dijkstra(1, n)
 print(-1 if dist[n] == INF else dist[n])
