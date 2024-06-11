@@ -1,3 +1,5 @@
+import sys
+INF = sys.maxsize
 expr = input()
 var = {}
 index = {}
@@ -55,6 +57,6 @@ def choose(i):
         var[index[i]] = 0
 
 expr2 = convert()
-mx = 0   
+mx = -INF
 choose(0)
 print(mx)
