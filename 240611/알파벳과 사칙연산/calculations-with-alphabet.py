@@ -21,7 +21,8 @@ def convert():
                 stack.append(s)
             else:
                 stack.append(s)
-    result += stack.pop()
+    if stack:
+        result += stack.pop()
     return result
 
 def cal(a, b, op):
