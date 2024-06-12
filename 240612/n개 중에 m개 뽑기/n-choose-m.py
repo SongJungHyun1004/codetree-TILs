@@ -1,15 +1,13 @@
 n, m = map(int, input().split())
+arr = [i+1 for i in range(n)]
 num = []
-visited = [False]*(n+1)
-def combi(i, last):
-    if i == m:
-        print(*num)
+def combi(i, cnt):
+    if i == n:
+        if cnt == m:
+            print(*num)
         return
-    for nn in range(last, n+1):
-        if not visited[nn]:
-            num.append(nn)
-            visited[nn] = True
-            combi(i+1, nn+1)
-            num.pop()
-            visited[nn] = False
-combi(0, 1)
+    num.append(arr[i])
+    combi(i+1, cnt+1)
+    num.pop()
+    combi(i+1, cnt)
+combi(0, 0)
