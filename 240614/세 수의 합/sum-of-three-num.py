@@ -8,8 +8,8 @@ for i in range(n-1):
         s = arr[i]+arr[j]
         if k-s in dic:
             cnt += dic[k-s]
-        if s in dic:
-            dic[s] += 1
-        else:
-            dic[s] = 1
+    if arr[i] in dic:
+        dic[arr[i]] += 1
+    else:
+        dic[arr[i]] = 1
 print(cnt)
