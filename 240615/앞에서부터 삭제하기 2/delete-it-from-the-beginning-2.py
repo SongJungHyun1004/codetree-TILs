@@ -1,15 +1,14 @@
-from heapq import heappush, heappop
+from heapq import heappush
 
 n = int(input())
 arr = list(map(int, input().split()))
 pq = []
 heappush(pq, arr[-1])
-heappush(pq, arr[-2])
+summation = pq[0]
 mx = 0
-for k in range(n-3, -1, -1):
-    mn = heappop(pq)
-    avg = sum(pq)/len(pq)
-    mx = max(mx, avg)
-    heappush(pq, mn)
+for k in range(n-2, 0, -1):
     heappush(pq, arr[k])
+    summation += arr[k]
+    avg = (summation-pq[0])/(len(pq)-1)
+    mx = max(mx, avg)
 print(f'{mx:.2f}')
