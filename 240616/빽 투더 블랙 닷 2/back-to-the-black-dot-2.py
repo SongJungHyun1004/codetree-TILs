@@ -11,7 +11,11 @@ for _ in range(m):
     graph[i].append((j, d))
     graph[j].append((i, d))
 
+memo = [[INF] * (n+1) for _ in range(n+1)]
+
 def dijkstra(src, dst):
+    if memo[src][dst] != INF:
+        return memo[src][dst]
     dist = [INF]*(n+1)
     dist[src] = 0
     pq = []
@@ -24,7 +28,8 @@ def dijkstra(src, dst):
             if dist[nxt] > now_d + nxt_d:
                 dist[nxt] = now_d + nxt_d
                 heappush(pq, (dist[nxt], nxt))
-    return dist[dst]
+    memo[src][dst] = dist[dst]
+    return memo[src][dst]
 
 mn = INF
 for start in blacks:
