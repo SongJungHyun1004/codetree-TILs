@@ -23,14 +23,21 @@ def drop(box):
     for j in range(4):
         k = 3
         for i in range(3, -1, -1):
-            if grid[i][j]:
-                if i and grid[i][j] == grid[i-1][j]:
-                    tmp[k][j] = 2*grid[i][j]
-                    grid[i-1][j] = 0
-                else:
-                    tmp[k][j] = grid[i][j]
+            if box[i][j]:
+                tmp[k][j] = box[i][j]
                 k -= 1
-    return tmp
+    tmp2 = [[0]*4 for _ in range(4)]
+    for j in range(4):
+        k = 3
+        for i in range(3, -1, -1):
+            if tmp[i][j]:
+                if i and tmp[i][j] == tmp[i-1][j]:
+                    tmp2[k][j] = 2*tmp[i][j]
+                    tmp[i-1][j] = 0
+                else:
+                    tmp2[k][j] = tmp[i][j]
+                k -= 1
+    return tmp2
 
 if d == 'L':
     grid = rotateL(grid)
