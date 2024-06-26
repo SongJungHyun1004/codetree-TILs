@@ -7,7 +7,8 @@ for _ in range(q):
         if cmd[0] == 'add':
             val = val + (1 << x)
         elif cmd[0] == 'delete':
-            val = val - (1 << x)
+            if((val >> x) & 1):
+                val = val - (1 << x)
         elif cmd[0] == 'print':
             print((val >> x) & 1)
         elif cmd[0] == 'toggle':
