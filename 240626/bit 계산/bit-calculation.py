@@ -7,7 +7,8 @@ for _ in range(q):
     else:
         x = int(cmd[1])
         if cmd[0] == 'add':
-            val |= (1 << x)
+            if not ((val >> x) & 1):
+                val += (1 << x)
         elif cmd[0] == 'delete':
             if((val >> x) & 1):
                 val -= (1 << x)
