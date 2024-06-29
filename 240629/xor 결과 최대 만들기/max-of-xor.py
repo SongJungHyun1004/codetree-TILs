@@ -12,5 +12,5 @@ def choose(i, cnt, value):
     choose(i+1, cnt+1, value^arr[i])
     choose(i+1, cnt, value)
 mx = 0
-choose(0, 0, 1)
+choose(0, 0, 0)
 print(mx)
