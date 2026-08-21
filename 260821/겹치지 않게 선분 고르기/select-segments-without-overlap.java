@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Main {
-    static int n, ans;
+    static int n;
     static int[][] segments;
     static List<int[]> list = new ArrayList<>();
 
@@ -13,8 +13,9 @@ public class Main {
             segments[i][0] = sc.nextInt();
             segments[i][1] = sc.nextInt();
         }
-        choose(0);
-        System.out.println(ans);
+        for(int x = n; x >= 1; x--){
+            comb(0, 0, x);
+        }
     }
 
     static boolean isOverlapped(int[] seg1, int[] seg2){
@@ -34,16 +35,18 @@ public class Main {
         return true;
     }
 
-    static void choose(int idx){
-        if(idx == n){
-            if(isPossible())
-                ans = Math.max(ans, list.size());
+    static void comb(int start, int depth, int target){
+        if(depth == target){
+            if(isPossible()){
+                System.out.println(target);
+                System.exit(0);
+            }
             return;
         }
-        int[] val = new int[] {segments[idx][0], segments[idx][1]};
-        list.add(val);
-        choose(idx+1);
-        list.remove(list.size()-1);
-        choose(idx+1);
+        for(int i = start; i < n; i++){
+            list.add(segments[i]);
+            comb(i+1, depth+1, target);
+            list.remove(list.size()-1);
+        }
     }
 }
