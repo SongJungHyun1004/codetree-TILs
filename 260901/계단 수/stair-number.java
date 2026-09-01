@@ -9,10 +9,10 @@ public class Main {
             dp[1][i] = 1;
         for(int i = 2; i <= n; i++){
             for(int j = 0; j <= 9; j++){
-                for(int k = 0; k <= 9; k++){
-                    if(Math.abs(j-k) != 1) continue;
-                    dp[i][k] = (dp[i][k] + dp[i-1][j]) % MOD;
-                }
+                if(j > 0)
+                    dp[i][j] = (dp[i][j] + dp[i-1][j-1]) % MOD;
+                if(j < 9)
+                    dp[i][j] = (dp[i][j] + dp[i-1][j+1]) % MOD;
             }
         }
         int ans = 0;
