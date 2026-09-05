@@ -8,15 +8,14 @@ public class Main {
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
-            map.put(arr[i], map.getOrDefault(arr[i], 0)+1);
         }
         int cnt = 0;
         for(int i = 0; i < n; i++){
-            map.put(arr[i], map.get(arr[i])-1);
-            for(int j = 0; j < i; j++){
+            for(int j = i+1; j < n; j++){
                 int target = k-arr[i]-arr[j];
                 cnt += map.getOrDefault(target, 0);
             }
+            map.put(arr[i], map.getOrDefault(arr[i], 0)+1);
         }
         System.out.println(cnt);
     }
