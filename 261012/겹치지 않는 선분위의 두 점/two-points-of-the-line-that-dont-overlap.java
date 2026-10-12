@@ -36,20 +36,15 @@ public class Main {
 
     static boolean isPossible(long x){
         int cnt = 0;
-        long last = -1;
+        long last = Long.MIN_VALUE;
         for(int i = 0; i < m; i++){
             long s = points[i][0];
             long e = points[i][1];
-            long p = s;
-            if(cnt > 0)
-                p = Math.max(s, last + x);
-            while(p <= e){
-                last = p;
-                p += x;
+            while(last + x <= e){
                 cnt += 1;
+                last = Math.max(s, last+x);
             }
         }
-
         return cnt >= n;
     }
 }
